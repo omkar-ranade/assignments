@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--  <mvc:annotation-driven/>
+     <import resource="hessian-servlet.xml"/> -->
+	<import resource="springamqp-sender-context.xml"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:server.properties</value>
+        </property>
+    </bean>
+
+    <import resource="springMongoConfig.xml"/>
+    <context:component-scan base-package="com.springremoting"/>
+
+    <bean id="employeeService" class="com.springremoting.service.EmployeeService"/>
+
+
+    <bean name="/EmployeeService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="employeeService"/>
+        <property name="serviceInterface" value="com.springremoting.service.IEmployeeService"/>
+    </bean>
+
+    <!--Remoting Configuration for -->
+
+   <!--  <bean id="groovyEmployeeService" class="com.springremoting.service.EmployeeGroovyService"/>
+    <bean name="/GroovyEmployeeService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="groovyEmployeeService"/>
+        <property name="serviceInterface" value="com.springremoting.service.IEmployeeGroovy"/>
+    </bean>
+ -->
+    </beans>

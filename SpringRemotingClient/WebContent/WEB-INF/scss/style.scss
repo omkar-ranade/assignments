@@ -1,0 +1,129 @@
+html,body
+{
+	margin:0;
+	padding:0;
+	height:100%;
+	color: #444446;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	letter-spacing: 0.025em;
+}
+
+#content {
+	margin: 0 auto;
+	width: 80%;
+}
+
+#create-employee-block{
+	h2 {
+		font-size: 22px;
+		color: #336699;
+	}
+	#search-emp-lnk {
+		float: right;
+		margin-bottom: 15px;
+		a {
+			color: #336699;
+			text-decoration: none;
+			font-size: 14px;		
+		}
+		span {
+			background: url("https://cc3.dealer.com/cc7/crm-ui/1.170.0/img/search-reversed.png") no-repeat scroll 4px 2px rgba(140, 38, 38, 0)		
+		}	
+	}
+	table {
+		border: 2px solid lightgray;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		th {
+			background: #368;
+			border-left: 1px solid #ddd;
+			border-radius: 2px 2px 0 0;
+			font-weight: bold;
+			overflow: hidden;
+			padding: 3px 8px;
+			white-space: nowrap;
+			color: #fff;
+			text-shadow: 0 1px 1px #444446;
+			text-align: left;
+			padding: 5px;
+		}
+		td {
+			border: 1px solid lightgray;
+			padding: 5px;		
+		}
+		.input-text {
+			border: none;		
+		}
+	}
+	.form-buttons {
+		margin: 20px;
+		input {
+			border-color: #4b8a0d;
+			color: #4b8a0d;
+			font-weight: normal;
+			background-image: linear-gradient(to bottom, #f9f9f9, #efefef);
+			border: 1px solid #777777;
+			border-radius: 4px;
+			box-shadow: 0 1px 0 white inset, 0 1px 0 rgba(255, 255, 255, 0.6);
+			cursor: pointer;
+			outline: none;
+			}
+		input:hover {
+			box-shadow: 0 1px 0 white inset, 0 0 2px rgba(106, 124, 146, 0.7), 0 1px 0 rgba(255, 255, 255, 0.6);
+			outline: none;
+		}
+		input:first-child {
+				margin-right: 25px;
+			}
+		}
+}
+
+#search-employee-block {
+	h2 {
+		font-size: 22px;
+		color: #336699;
+	}
+	#add-emp-link {
+		margin: 20px 215px;
+		a {
+			color: #336699;
+			text-decoration: none;
+			font-size: 14px;		
+		}	
+	}
+	table {
+		border: 2px solid lightgray;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+		td {
+			padding: 15px;
+			border: 1px solid lightgray;
+			input {
+				border: none;
+			}
+		}
+		.title {
+			background: #368;
+			color: #fff;
+			text-align: left;
+			font-weight: bold;
+		}
+		.middle {
+			text-align: center;
+			color: lightgray;
+			font-size: 14px;
+			font-family: monospace;
+		}
+	}
+	#search-submit {
+			margin-top: 30px;
+			border-color: #4b8a0d;
+			color: #4b8a0d;
+			font-weight: normal;
+			background-image: linear-gradient(to bottom, #f9f9f9, #efefef);
+			border: 1px solid #777777;
+			border-radius: 4px;
+			box-shadow: 0 1px 0 white inset, 0 1px 0 rgba(255, 255, 255, 0.6);
+			cursor: pointer;
+			outline: none;
+	}
+}

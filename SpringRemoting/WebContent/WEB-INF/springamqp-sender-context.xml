@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	  http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	  http://www.springframework.org/schema/rabbit
+	  http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+	<rabbit:connection-factory id="connectionFactory"
+		host="192.168.62.130" username="test" password="test" />
+
+	<rabbit:admin connection-factory="connectionFactory" />
+	<!-- <rabbit:connection-factory connection-factory="connectionFactory" /> -->
+
+	<rabbit:queue id="employeeSaveQueue" name="employeeSaveQueue"
+		auto-delete="false" durable="true" />
+
+	<rabbit:topic-exchange id="employeeSaveExchange"
+		name="employeeSaveExchange">
+		<rabbit:bindings>
+			<rabbit:binding queue="employeeSaveQueue" pattern="employeeSavedKey">
+			</rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<rabbit:template id="amqpSendTemplate"
+		connection-factory="connectionFactory" exchange="employeeSaveExchange"
+		routing-key="employeeSavedKey" queue="employeeSaveQueue" />
+
+
+</beans>
