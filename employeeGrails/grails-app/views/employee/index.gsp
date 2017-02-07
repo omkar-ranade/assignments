@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
+		<meta name="layout" content="main"/>
+		<title>Form</title>
+		<head>
 <link rel="stylesheet" href="../css/style.css" type="text/css">
 <link rel="stylesheet" href="../css/jquery-ui.css">
 <script src="../js/jquery-1.12.4.js"></script>
 <script src="../js/jquery-ui.js"></script>
 <script src="../js/knockout-3.4.1.js"></script>
-<script src="../js/yui-min.js" type="text/javascript"></script>
+<script src="../js/yui-min.js"></script>
 <title>Welcome: Dealer.com</title>
 <script>
 $(document).ready(function() {
 	$( function() {
-		$( "#emp-dob" ).datepicker({
+		$( "#dob" ).datepicker({
+		
 		});
 	});
 });
- 
- YUI().use("node","event",function(Y) {
+YUI().use("node","event",function(Y) {
 	var button = Y.one("#btn-submit");
 	button.on('click', function (e) {
 		Y.one('#loader').show();
@@ -25,10 +28,9 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 });
- 
 function ajaxRequest() {
 	YUI().use("io-form", function(Y) {
-    var uri = "https://reqres.in/api/users";
+    var uri = document.location.href;
 	var cfg = {
         method: 'POST',
         form: {
@@ -41,9 +43,9 @@ function ajaxRequest() {
     function complete(id, o, args) {
         var id = myform; // Transaction ID.
         var data = o.responseText; // Response data.
-		console.log("databelow");
-		console.log(data);
 		$("#loader").hide();
+		var myurl = document.location.origin + "/employeeGrails/employee/save/myform";
+		$("#message").html("Record added. <a href='"+ myurl +"'>Go to List.</a>");
 	};
     // Subscribe to event "io:complete", and pass an array
     // as an argument to the event handler "complete", since
@@ -55,8 +57,6 @@ function ajaxRequest() {
     var request = Y.io(uri,cfg);
 	});
 }
-	    
- 
 function calAge(value) {
 	if(value == null) {
 		return 0; //should not throw js isNaN error
@@ -81,41 +81,64 @@ function onLoad()
 
 </script>
 </head>
-<body onload="onLoad()">
+		
+	</head>
+	<body onload="onLoad()">
 <div id="content">
 	<div id="create-employee-block">
-	<form name="create-emp" id="myform" method="POST">
+	<g:form name="myform" id="myform" controller="employee" action="save">
 		<h2>Create Employee</h2>
 		<div id="search-emp-lnk">
-			<span></span>
-			<a href="search.html">	&#128269; Search Employee</a>
-		</div>
+				<span></span>
+				<g:link action="search"> &#9906; Search Employee</g:link>
+			</div>
 		<table>
 			<tr>
-				<th>First Name</th>
+				<th>Id</th>
 				<th>Last Name</th>
+				<th>First Name</th>
 				<th>City</th>
 				<th>DOB</th>
-				<th>Age</th>
 			</tr>
 			<tr>
-				<td><input class="input-text" type="text" id="emp-name" name="emp-name"></td>
-				<td><input class="input-text" type="text" id="emp-name" name="emp-name"></td>
-				<td><input class="input-text" type="text" id="emp-address" name="emp-address"></td>
-				<td><input class="input-text" type="text" id="emp-dob" data-bind="value: dob" name="emp-dob" placeholder="MM/DD/YYYY"></td>
-				<td><input class="input-text" type="text" readonly id="emp-age" data-bind="value: totalage" name="emp-age"></td>
-			</tr>
+				<td><g:textField name="empId"/><br/><br/></td>
+				<td><g:textField name="empLastName"/><br/><br/></td>
+				<td><g:textField name="empFirstName"/></td>
+				<td><g:textField name="city"/><br/><br/></td>
+				<td><g:textField name="dob"  id="dob" data-bind="value: dob" placeholder="MM/DD/YYYY"/></td>
+				<%--<td><g:textField name="age" id="emp-age" data-bind="value: totalage" name="emp-age"/></td>
+			--%></tr>
 		</table>
 		<div class="form-buttons">
-			
-			<input type="submit" name="submit" id="btn-submit" onSubmit="ajaxRequest();" value="Add Employee">
-			<input type="reset" name="cancel" value="Clear">
-			<span id="loader" style="display:none">&nbsp;&nbsp;&nbsp;  Please wait...</span>
+			<g:actionSubmit name="submit" id="btn-submit" value="Save"/>
+            <g:field type="reset" name="myReset" value="Clear" />
+            <span id="loader" style="display:none">&nbsp;&nbsp;&nbsp;  Please wait...</span>
+            <span id="message"></span>
 		</div>
-	</form>
+	</g:form>
 	</div>
 </div>	
-	
+
 	
 </body>
-</html>
+	
+	<%--<body>
+        <g:form controller="employee" action="save">
+        	<div id="search-emp-lnk">
+				<span></span>
+				<g:link action="search">Search Employee</g:link>
+			</div>
+        
+            <label>First Name: </label>
+            <g:textField name="firstName"/><br/><br/>
+            <label>Last Name: </label>
+            <g:textField name="lastName"/><br/><br/>
+            <label>City: </label>
+            <g:textField name="city"/><br/><br/>
+            <label>DOB: </label>
+            <g:textField name="dob"/><br/><br/>
+            <g:actionSubmit value="Save"/>
+            <g:field type="reset" name="myReset" value="Clear" />
+        </g:form>
+	</body>
+--%></html>

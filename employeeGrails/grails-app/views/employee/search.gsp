@@ -11,8 +11,8 @@
 				<g:link action="index">Add Employee</g:link>
 			</div>
         
-            <label>First Name: </label>
-            <g:textField name="firstName"/><br/><br/>
+            <label>Id: </label>
+            <g:textField name="empId"/><br/><br/>
             <g:actionSubmit value="Search Process"/>
             <g:field type="reset" name="myReset" value="Clear" />
         </g:form>

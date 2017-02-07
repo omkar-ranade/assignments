@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="employeeGrails">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/controllers"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/domain"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/services"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/taglib"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/grails-app/utils"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/integration"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test/unit"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/asset-pipeline-1.9.9/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/asset-pipeline-1.9.9/grails-app/controllers"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/asset-pipeline-1.9.9/grails-app/services"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/asset-pipeline-1.9.9/grails-app/taglib"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/asset-pipeline-1.9.9/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/cache-1.1.8/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/cache-1.1.8/grails-app/services"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/cache-1.1.8/grails-app/taglib"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/cache-1.1.8/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/cache-1.1.8/src/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/database-migration-1.4.0/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/database-migration-1.4.0/grails-app/controllers"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/database-migration-1.4.0/grails-app/views"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/database-migration-1.4.0/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/hibernate4-4.3.6.1/src/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/jquery-1.11.1/grails-app/assets"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/jquery-1.11.1/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/jquery-1.11.1/grails-app/services"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/jquery-1.11.1/grails-app/taglib"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/jquery-1.11.1/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/scaffolding-2.1.2/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/scaffolding-2.1.2/src/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/tomcat-7.0.55/src/groovy"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/tomcat-7.0.55/src/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/webxml-1.4.1/grails-app/conf"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.link_to_grails_plugins/webxml-1.4.1/src/groovy"/>
+        <property name="context-root" value="employeeGrails"/>
+        <property name="java-output-path" value="/employeeGrails/target-eclipse/classes"/>
+    </wb-module>
+</project-modules>

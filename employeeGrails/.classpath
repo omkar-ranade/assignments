@@ -143,5 +143,16 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/amqp-client-2.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/hessian-4.0.38.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/hessian-4.0.38-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/jackson-annotations-2.7.0-rc1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/jackson-core-2.7.0-rc1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/jackson-databind-2.7.0-rc1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/json-20090211.jar"/>
+	<classpathentry kind="lib" path="C:/Users/amitagraw/Desktop/flexjson-2.1-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>
