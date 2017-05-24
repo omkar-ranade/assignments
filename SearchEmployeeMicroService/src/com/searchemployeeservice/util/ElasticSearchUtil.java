@@ -11,28 +11,31 @@ import io.searchbox.core.SearchResult.Hit;
 import io.searchbox.indices.IndicesExists;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.searchemployeeservice.bean.Employee;
+import com.searchemployeeservice.controller.SearchController;
 
 public class ElasticSearchUtil {
 
 	private static final String INDEX = "employees";
 
 	private static JestClient client = null;
+	
+	final static Logger log = Logger.getLogger(ElasticSearchUtil.class);
+	static boolean isInfo = log.isInfoEnabled();
 
 	private static JestClient getClient() throws Exception {
+		if(isInfo)
+			log.info("Method Started");
 		if (client == null) {
 
 			JestClientFactory factory = new JestClientFactory();
@@ -43,13 +46,19 @@ public class ElasticSearchUtil {
 
 			boolean indexExists = jestClient.execute(
 					new IndicesExists.Builder(".kibana").build()).isSucceeded();
-
+			
+			log.info("IndexExist : "+indexExists);
+			
 			if (!indexExists) {
+				log.error("Index " + INDEX + " not found in elasticsearch.");	
 				throw new Exception("Index " + INDEX
 						+ " not found in elasticsearch.");
 			}
 			client = jestClient;
 		}
+		if(isInfo)
+			log.info("Method Exit");
+		
 		return client;
 	}
 
@@ -64,59 +73,71 @@ public class ElasticSearchUtil {
 	 */
 	public static List<Employee> searchEmployee(String criteria)
 			throws Exception {
+		if(isInfo)
+			log.info("Method Started");
 		if (client == null) {
 			client = getClient();
 		}
 
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		searchSourceBuilder.query(QueryBuilders.matchQuery("empId", criteria));
+		Map<String, Employee> employeeMap = new HashMap<>();
 
+		// emp id search
+		searchSourceBuilder.query(QueryBuilders.wildcardQuery("empId", "*"
+				+ criteria + "*"));
+		employeeMap.putAll(getSearchResults(searchSourceBuilder));
+
+		// emp first name search
+		searchSourceBuilder.query(QueryBuilders.wildcardQuery("empFirstName",
+				"*" + criteria + "*"));
+		employeeMap.putAll(getSearchResults(searchSourceBuilder));
+
+		// emp last name search
+		searchSourceBuilder.query(QueryBuilders.wildcardQuery("empLastName",
+				"*" + criteria + "*"));
+		employeeMap.putAll(getSearchResults(searchSourceBuilder));
+
+		// email id search
+		searchSourceBuilder.query(QueryBuilders.wildcardQuery("emailId", "*"
+				+ criteria + "*"));
+		employeeMap.putAll(getSearchResults(searchSourceBuilder));
+
+		List<Employee> list = new ArrayList<Employee>(employeeMap.values());
+		
+		if(isInfo)
+			log.info("Method Exit");
+		
+		return list;
+	}
+
+	private static Map<String, Employee> getSearchResults(
+			SearchSourceBuilder searchSourceBuilder) throws IOException,
+			ParseException {
+
+		if(isInfo)
+			log.info("Method Started");
+		
 		Search search = new Search.Builder(searchSourceBuilder.toString())
 				.addIndex(".kibana").addType("employee").build();
 
 		SearchResult result = client.execute(search);
 
-		List<Employee> employeeList = new ArrayList<>();
+		Map<String, Employee> employeeMap = new HashMap<>();
 		for (Hit<Employee, Void> hit : result.getHits(Employee.class)) {
 			Employee emp = new Employee();
 
 			emp.setEmpId(hit.source.getEmpId());
 			emp.setEmpFirstName(hit.source.getEmpFirstName());
 			emp.setEmpLastName(hit.source.getEmpLastName());
-			emp.setCity(hit.source.getCity());
+			emp.setEmailID(hit.source.getEmailId());
+			emp.setPhoneNo(hit.source.getPhoneNo());
 
-			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-			String dt = format.format(hit.source.getDob());
-
-			Date date = format.parse(dt);
-
-			emp.setDob(date);
-
-			employeeList.add(emp);
+			employeeMap.put(emp.getEmpId(), emp);
 		}
 
-		// String result = convertEmployeesIntoJSonData(employeeList);
-
-		return employeeList;
-	}
-
-	/**
-	 * Util method to convert JSON employee data into {@link Employee} object
-	 * 
-	 * @param jSonData
-	 *            Employee data as String
-	 * @return {@link Employee} object
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public static Employee convertJSonDataToEmployees(String jSonData)
-			throws JsonParseException, JsonMappingException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-
-		Employee emp = mapper.readValue(jSonData, Employee.class);
-
-		return emp;
+		if(isInfo)
+			log.info("Method Exit");
+		return employeeMap;
 	}
 
 	/**
@@ -128,17 +149,23 @@ public class ElasticSearchUtil {
 	 * @throws Exception
 	 */
 	public static void saveEmployee(Employee employee) throws Exception {
+		if(isInfo)
+			log.info("Method Started");
+		
 		if (client == null) {
 			client = getClient();
 		}
 
 		Map<String, Object> source = createJsonDocument(employee);
 
-		Index index = new Index.Builder(source).index(".kibana").type("employee")
-				.build();
+		Index index = new Index.Builder(source).index(".kibana")
+				.type("employee").build();
 		DocumentResult result = client.execute(index);
 
-		System.out.println(result.getResponseCode());
+		log.info("Response code -"+ result.getResponseCode());
+		
+		if(isInfo)
+			log.info("Method exit");
 
 	}
 
@@ -155,8 +182,8 @@ public class ElasticSearchUtil {
 		jsonDocument.put("empId", emp.getEmpId());
 		jsonDocument.put("empFirstName", emp.getEmpFirstName());
 		jsonDocument.put("empLastName", emp.getEmpLastName());
-		jsonDocument.put("city", emp.getCity());
-		jsonDocument.put("dob", emp.getDob());
+		jsonDocument.put("emailId", emp.getEmailId());
+		jsonDocument.put("phoneNo", emp.getPhoneNo());
 		return jsonDocument;
 	}
 }
